@@ -2,12 +2,12 @@ import discord
 from discord.ext import commands
 import os
 
-client = discord.Client()
+prefix = os.environ['prefix']
+token = os.environ['token']
 
+client = discord.Client()
 client = commands.Bot(command_prefix=commands.when_mentioned_or(prefix), intents=discord.Intents.all())
 
-token = os.environ['token']
-prefix = os.environ['prefix']
 @client.event
 async def on_ready():
     print("Đăng nhập: "+client.user.name)
