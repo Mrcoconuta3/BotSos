@@ -11,7 +11,14 @@ client = commands.Bot(command_prefix=commands.when_mentioned_or(prefix), intents
 @client.event
 async def on_ready():
     print("Đăng nhập: "+client.user.name)
-    
+ 
+@client.event
+async def on_message(message):
+    if message.author == client.user or message.author == message.author.bot:
+        return
+    else:
+        await client.process_commands(message)
+        
 @client.command(name= "calc", help = f'** Tính toán Đội hình **\n``{prefix}calc <Tổng> <%Bộ Binh> <%Lính Xe> <%Cung Thủ>')
 async def calc(ctx, t:int , a:int=None, b:int=None , c:int=None):
     if a is None:
